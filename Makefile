@@ -22,6 +22,7 @@ clean:
 	rm -rf build
 	rm -rf download
 	rm -rf sources
+	rm -rf tmp
 
 .PHONY: clean fetch-sources
 .DELETE_ON_ERROR:
