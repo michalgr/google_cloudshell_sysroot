@@ -5,7 +5,7 @@ export LDFLAGS += -L$(SYSROOT)/lib
 export CPPFLAGS += -I$(SYSROOT)/include
 export PATH := $(SYSROOT)/bin:$(PATH)
 
-sources/%: download/%.tar.xz
+sources/%: download/%
 	mkdir -p sources
 	tar -xf $< -C sources
 
