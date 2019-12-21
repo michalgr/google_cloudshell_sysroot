@@ -24,7 +24,7 @@ clean:
 	rm -rf sources
 	rm -rf tmp
 
-.PHONY: clean fetch-sources
+.PHONY: clean
 .DELETE_ON_ERROR:
 
 include *.mk
