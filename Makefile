@@ -5,17 +5,19 @@ export LDFLAGS += -L$(SYSROOT)/lib
 export CPPFLAGS += -I$(SYSROOT)/include
 export PATH := $(SYSROOT)/bin:$(PATH)
 
-sources/%: download/%
+sources/%/.sentinel: download/%
 	mkdir -p sources
 	tar -xf $< -C sources
+	touch $@
 
-build/%.autotools: sources/%
-	mkdir -p $@
-	cd $@ && ../../$</configure --prefix=$(SYSROOT)
+build/%.autotools/.sentinel: sources/%/.sentinel
+	mkdir -p $(dir $@)
+	cd $(dir $@) && ../../$(dir $<)/configure --prefix=$(SYSROOT)
+	touch $@
 
-build/%.sentinel: build/%
-	cd $< && make
-	cd $< && make install
+build/%.sentinel: build/%/.sentinel
+	cd $(dir $<) && make
+	cd $(dir $<) && make install
 	touch $@
 
 clean:
