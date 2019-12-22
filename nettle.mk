@@ -8,7 +8,7 @@ download/nettle-$(NETTLE_VERSION):
 
 build/nettle-$(NETTLE_VERSION).autotools/.sentinel: sources/nettle-$(NETTLE_VERSION)/.sentinel gmp
 	mkdir -p $(dir $@)
-	cd $(dir $@) && ../../$</configure \
+	cd $(dir $@) && ../../$(dir $<)/configure \
 		--prefix=$(SYSROOT) \
 		--enable-public-key
 	touch $@
