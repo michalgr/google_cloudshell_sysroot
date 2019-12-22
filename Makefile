@@ -9,16 +9,19 @@ sources/%/.sentinel: download/%
 	mkdir -p sources
 	tar -xf $< -C sources
 	touch $@
+.PRECIOUS: sources/%/.sentinel
 
 build/%.autotools/.sentinel: sources/%/.sentinel
 	mkdir -p $(dir $@)
 	cd $(dir $@) && ../../$(dir $<)/configure --prefix=$(SYSROOT)
 	touch $@
+.PRECIOUS: build/%.autotools/.sentinel
 
 build/%.sentinel: build/%/.sentinel
 	cd $(dir $<) && make
 	cd $(dir $<) && make install
 	touch $@
+.PRECIOUS: build/%.sentinel
 
 clean:
 	rm -rf build
